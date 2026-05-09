@@ -20,7 +20,7 @@ class TestLogin():
   def teardown_method(self, method):
     self.driver.quit()
 
-  def test_login(self):
+  def test_login_success(self):
     self.driver.get("https://www.saucedemo.com/")
     self.driver.find_element(By.CSS_SELECTOR, "[data-test=\"username\"]").click()
     self.driver.find_element(By.CSS_SELECTOR, "[data-test=\"username\"]").send_keys("standard_user")
@@ -31,3 +31,23 @@ class TestLogin():
     assert "inventory.html" in self.driver.current_url
     # Test that there is a title class and it has Products as text
     assert self.driver.find_element(By.CLASS_NAME, "title").text == "Products"
+
+  def test_login_wrong_username(self):
+    self.driver.get("https://www.saucedemo.com/")
+    self.driver.find_element(By.CSS_SELECTOR, "[data-test=\"username\"]").click()
+    self.driver.find_element(By.CSS_SELECTOR, "[data-test=\"username\"]").send_keys("bad_user")
+    self.driver.find_element(By.CSS_SELECTOR, "[data-test=\"password\"]").send_keys("secret_sauce")
+    self.driver.find_element(By.CSS_SELECTOR, "[data-test=\"login-button\"]").click()
+    
+    error = self.driver.find_element(By.CSS_SELECTOR, '[data-test="error"]')
+    assert "Epic sadface" in error.text
+
+  def test_login_wrong_password(self):
+    self.driver.get("https://www.saucedemo.com/")
+    self.driver.find_element(By.CSS_SELECTOR, "[data-test=\"username\"]").click()
+    self.driver.find_element(By.CSS_SELECTOR, "[data-test=\"username\"]").send_keys("standard_user")
+    self.driver.find_element(By.CSS_SELECTOR, "[data-test=\"password\"]").send_keys("bad_password")
+    self.driver.find_element(By.CSS_SELECTOR, "[data-test=\"login-button\"]").click()
+    
+    error = self.driver.find_element(By.CSS_SELECTOR, '[data-test="error"]')
+    assert "Epic sadface" in error.text
