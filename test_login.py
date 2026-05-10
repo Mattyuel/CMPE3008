@@ -39,6 +39,7 @@ class TestLogin():
     self.driver.find_element(By.CSS_SELECTOR, "[data-test=\"password\"]").send_keys("secret_sauce")
     self.driver.find_element(By.CSS_SELECTOR, "[data-test=\"login-button\"]").click()
     
+    # Test that there is an error produced with specific words
     error = self.driver.find_element(By.CSS_SELECTOR, '[data-test="error"]')
     assert "Epic sadface" in error.text
 
@@ -49,5 +50,6 @@ class TestLogin():
     self.driver.find_element(By.CSS_SELECTOR, "[data-test=\"password\"]").send_keys("bad_password")
     self.driver.find_element(By.CSS_SELECTOR, "[data-test=\"login-button\"]").click()
     
+    # Test that there is an error produced with specific words
     error = self.driver.find_element(By.CSS_SELECTOR, '[data-test="error"]')
     assert "Epic sadface" in error.text
