@@ -34,3 +34,9 @@ Test Add to Cart (In Cart):
 3/ Clicks on cart button using the button ID
 4/ Checks that "inventory-item-name" element exists
 5/ Checks that this ID has the correct product text (The bag)
+
+Test Runtime:
+1/ Performs the login and logout procedures
+2/ Starts a timer after clicking the login or logout button
+3/ Ends the timer after the clicking
+4/ Test passes if the new page is recognised with 1 second
